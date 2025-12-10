@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corrected API Demo</title>
+</head>
+<body>
+
+    <input type="button" onclick="demoapi()" value="Click">
+
+    <table >
+        <tr>
+            <th>Field</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td id="output1"></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td id="output2"></td>
+        </tr>
+        <tr>
+            <td>Phone</td>
+            <td id="output3"></td>
+        </tr>
+    </table>
+
+    <script>4
+        function demoapi() {
+
+            const apioutput1 = document.getElementById('output1');
+            const apioutput2 = document.getElementById('output2');
+            const apioutput3 = document.getElementById('output3');
+
+            const API = "https://jsonplaceholder.typicode.com/users";
+
+            fetch(API)
+                .then(response => response.json())
+                .then(data => {
+                    // Since API returns an array, selecting first user:
+                    const user = data[0];
+
+                    apioutput1.innerHTML = user.name;
+                    apioutput2.innerHTML = user.email;
+                    apioutput3.innerHTML = user.phone;
+                })
+                .catch(error => {
+                    console.log("Error fetching data", error);
+                    apioutput1.innerHTML = "Error";
+                    apioutput2.innerHTML = "Error";
+                    apioutput3.innerHTML = "Error";
+                });
+        }
+    </script>
+
+</body>
+</html>
